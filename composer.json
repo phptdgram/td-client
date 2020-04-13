@@ -1,0 +1,64 @@
+{
+    "name": "phptdgram/td-client",
+    "type": "library",
+    "description": "PHP TD Gram TdClient Component",
+    "keywords": [
+        "td-client",
+        "phptdgram",
+        "telegram",
+        "tdlib"
+    ],
+    "homepage": "https://github.com/phptdgram/td-client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aurimas Niekis",
+            "email": "aurimas@niekis.lt"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/phptdgram/td-client",
+        "source": "https://github.com/phptdgram/td-client"
+    },
+    "require": {
+        "php": "^7.4||^8.0",
+        "phptdgram/adapter": "^1.0",
+        "phptdgram/schema": "^1.0",
+        "psr/log": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "friendsofphp/php-cs-fixer": "^2",
+        "infection/infection": "^0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPTdGram\\TdClient\\": "src"
+        },
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PHPTdGram\\TdClient\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html build/html/",
+        "cs-check": "php-cs-fixer fix --dry-run --diff --diff-format udiff",
+        "cs-fix": "php-cs-fixer fix",
+        "test-ci": "phpunit --coverage-text --coverage-clover=coverage.clover",
+        "test-infection": "infection --min-msi=48 --threads=4 --only-covered",
+        "ci-run": ["@cs-check", "@test-ci", "@test-infection"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

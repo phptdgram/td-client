@@ -1,0 +1,16 @@
+{
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "timeout": 10,
+    "logs": {
+        "text": "build/infection/infection.log",
+        "summary": "build/infection/summary.log",
+        "perMutator": "build/infection/per-mutator.md",
+        "badge": {
+            "branch": "master"
+        }
+    }
+}

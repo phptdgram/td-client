@@ -1,0 +1,30 @@
+language: php
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+env:
+  global:
+    secure: Da9Zqn3WcYTNnvyvS3wlujDHBXv8ntdDLbpobXMxgcCvwC6NAGIWoAiCSG/Gc7bKbH99Z0t4sT3IfEgOsVH16cTgg9pD32EB/3RGHH+qUIiNge9xDSzOV8L66rcpg0PucwkUmWBjvgfLNhFjfQerD64QoLoX7I9ukHdh2bxThWn4FMAIdksQd/Ga52bcltvD9BWNrOpRWz0za+/7GHCrKjTR2uIO82T6ii9UOVjzSttwGhbQcRr/GnT2IlHYyAip+4xM3ZRpLFJ6+uBAiPost42T6/Cbsb1QCGewhXhvs8v5ZuBynZA2EQ36uIA7vNVzYxNJGXCO9pnmW+IJprqJAaCqVfsqtSzn0mFvkx1yhufuAGVsU+OBNvY4bcG81fWZhUuropDCd1MMkCUB+aR/DJ2vk/lHFgB2zsk75IMnaREbxkWL79MUR/27hdQosjeHdH+cd67K32OWCtEN1bor8cjpKOOyWmDgo/b53kbTK/lqxyUb1Qj7k1K0WzYvhy5rW+PMlQtGBx58jGt+alb5FhSH4HM72mTX8zzgiHrvus/SG7riHGRUIM5qlXeJFaVX6+McKMhXSFvTIH4R9emLm7Rz2ckWnwtfffmxvSPc+Adrg+kTZ+272OEeZcBsCcprQl/e2EiqMX/GrSrrnn3pV7p4zZaoiK0w+hDVCCT9Ggk=
+
+
+matrix:
+    fast_finish: true
+    allow_failures:
+        - php: nightly
+    include:
+        - php: 7.4
+        - php: nightly
+          env:
+              - COMPOSER_UPDATE_FLAGS=--ignore-platform-reqs
+              - PHP_CS_FIXER_IGNORE_ENV=true
+
+before_install:
+    - travis_retry composer self-update --no-interaction
+
+install:
+    - travis_retry composer update --no-interaction --prefer-dist --optimize-autoloader ${COMPOSER_UPDATE_FLAGS}
+
+script:
+    - composer ci-run
